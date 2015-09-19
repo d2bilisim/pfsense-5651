@@ -7,17 +7,14 @@ SSL_C="TR"
 SSL_ST="Istanbul"
 SSL_L="Kartal"
 
-mkdir -p /logimza/.openssl
-
 # Gerekirse sifirla
-# cd /logimza/.openssl
-# rm -rf password.txt CA/ ssl/
+# rm -rf /logimza/.openssl/password.txt /logimza/.openssl/CA/ /logimza/.openssl/ssl/ /usr/local/www/log_browser /sbin/logimza-imzala.sh /sbin/dhcptibduzenle.sh
 
 # Zaman damgasi icin OpenSSL ayarlari
+mkdir -p /logimza/.openssl
 fetch https://bitbucket.org/mono/pfsense-5651/raw/master/openssl.cnf -o /logimza/.openssl/openssl.cnf
 
 # Sertifika icin rasgele sifre olusturuyoruz
-
 touch /logimza/.openssl/password.txt
 openssl rand -base64 32 > /logimza/.openssl/password.txt
 cat /logimza/.openssl/password.txt
@@ -25,7 +22,6 @@ cat /logimza/.openssl/password.txt
 # Sertifika olusturma islemleri
 
 # Gerekli klasor ve dosyalari olustur
-
 mkdir -p /logimza/.openssl/ssl
 mkdir -p /logimza/.openssl/CA/private
 mkdir -p /logimza/.openssl/CA/newcerts
@@ -36,7 +32,6 @@ touch /logimza/.openssl/CA/tsaserial
 echo 011E > /logimza/.openssl/CA/tsaserial
 
 # CA olustur
-
 cd /logimza/.openssl/ssl
 openssl req -config /logimza/.openssl/openssl.cnf -passout file:/logimza/.openssl/password.txt -days 3650 -x509 -newkey rsa:2048 -sha256 -subj "/CN=$SSL_CN/emailAddress=$SSL_EMAIL/O=$SSL_O/C=$SSL_C/ST=$SSL_ST/L=$SSL_L" -out /logimza/.openssl/ssl/cacert.pem -outform PEM
 cp /logimza/.openssl/ssl/cacert.pem /logimza/.openssl/CA/
@@ -48,3 +43,12 @@ openssl req -new -key /logimza/.openssl/ssl/tsakey.pem -passin file:/logimza/.op
 openssl ca -config /logimza/.openssl/openssl.cnf -passin file:/logimza/.openssl/password.txt -days 3650 -batch -in /logimza/.openssl/ssl/tsareq.csr -subj "/CN=$SSL_CN/emailAddress=$SSL_EMAIL/O=$SSL_O/C=$SSL_C/ST=$SSL_ST/L=$SSL_L" -out /logimza/.openssl/ssl/tsacert.pem
 cp /logimza/.openssl/ssl/tsacert.pem /logimza/.openssl/CA/
 cp /logimza/.openssl/ssl/tsakey.pem /logimza/.openssl/CA/private/
+
+# log_browser ve imzalama betiklerini yukle
+fetch https://github.com/monobilisim/log_browser/archive/master.zip -o /tmp/log_browser.zip
+unzip -d /usr/local/www /tmp/log_browser.zip
+mv /usr/local/www/log_browser-master /usr/local/www/log_browser
+rm /tmp/log_browser.zip
+fetch https://bitbucket.org/mono/pfsense-5651/raw/master/logimza-imzala.sh -o /sbin/logimza-imzala.sh
+fetch https://bitbucket.org/mono/pfsense-5651/raw/master/dhcptibduzenle.sh -o /sbin/dhcptibduzenle.sh
+chmod +x /sbin/logimza-imzala.sh /sbin/dhcptibduzenle.sh
