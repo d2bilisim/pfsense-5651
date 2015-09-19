@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 
 SSL_CN="hotspot.pfsense.biz.tr"
 SSL_EMAIL="hotspot@pfsense.biz.tr"
