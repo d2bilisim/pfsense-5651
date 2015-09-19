@@ -4,13 +4,15 @@ files='
 /var/log/dhcpd.log
 /var/log/portalauth.log
 /var/squid/logs/access.log
+/var/log/httpry.log
 '
 
 for file in $files
 do
+    if [ -e $file ]; then
+
         cd /logimza
         cp $file ./
-
 
         openssl ts -config /logimza/.openssl/openssl.cnf -query -data `basename "$file"` -no_nonce -out `basename "$file"`.tsq
         openssl ts -config /logimza/.openssl/openssl.cnf -passin file:/logimza/.openssl/password.txt -reply -queryfile `basename "$file"`.tsq -out `basename "$file"`.der -token_out
@@ -28,4 +30,5 @@ do
         rm `basename "$file"`.tsq
         rm `basename "$file"`.der
 
+    fi
 done
