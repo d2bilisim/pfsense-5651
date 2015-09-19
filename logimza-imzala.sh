@@ -1,6 +1,9 @@
 #!/bin/sh
 
+awk -f /sbin/dhcptibduzenle.sh < /var/dhcpd/var/db/dhcpd.leases > /tmp/dhcpd-tib.log
+
 files='
+/tmp/dhcpd-tip.log
 /var/log/dhcpd.log
 /var/log/portalauth.log
 /var/squid/logs/access.log
@@ -32,3 +35,5 @@ do
 
     fi
 done
+
+rm /tmp/dhcpd-tip.log
