@@ -49,6 +49,7 @@ fetch https://github.com/d2bilisim/log_browser/archive/master.zip -o /tmp/log_br
 unzip -d /usr/local/www /tmp/log_browser.zip
 mv /usr/local/www/log_browser-master /usr/local/www/log_browser
 rm /tmp/log_browser.zip
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/pfSense-5651.xml -o /usr/local/share/pfSense/menu/pfSense-5651.xml
 fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/logimza-imzala.sh -o /sbin/logimza-imzala.sh
 fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/dhcptibduzenle.sh -o /sbin/dhcptibduzenle.sh
 chmod +x /sbin/logimza-imzala.sh /sbin/dhcptibduzenle.sh
