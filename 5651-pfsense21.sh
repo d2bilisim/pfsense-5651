@@ -46,11 +46,9 @@ cp /logimza/.openssl/ssl/tsacert.pem /logimza/.openssl/CA/
 cp /logimza/.openssl/ssl/tsakey.pem /logimza/.openssl/CA/private/
 
 # log_browser ve imzalama betiklerini yukle
-fetch https://github.com/d2bilisim/log_browser/archive/master.zip 
-mv master.zip /tmp/log_browser.zip
-unzip -d /usr/local/www /tmp/log_browser.zip
-mv /usr/local/www/log_browser-master /usr/local/www/log_browser
-rm /tmp/log_browser.zip
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/log_browser.tar.gz
+tar zxvf log_browser.tar.gz
+mv log_browser /usr/local/www/log_browser
 fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/dogrula-pfsense21.php 
 mv dogrula-pfsense21.php /usr/local/www/log_browser/dogrula.php
 fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/logimza-imzala-pfsense21.sh 
