@@ -33,7 +33,7 @@ echo 011E > /logimza/.openssl/CA/tsaserial
 
 # CA olustur
 cd /logimza/.openssl/ssl
-openssl req -config /logimza/.openssl/openssl.cnf -passout file:/logimza/.openssl/password.txt -days 3650 -x509 -newkey rsa:2048 -sha256 -subj "/CN=$SSL_CN/emailAddress=$SSL_EMAIL/O=$SSL_O/C=$SSL_C/ST=$SSL_ST/L=$SSL_L" -out /logimza/.openssl/ssl/cacert.pem -outform PEM
+/usr/local/bin/openssl req -config /logimza/.openssl/openssl.cnf -passout file:/logimza/.openssl/password.txt -days 3650 -x509 -newkey rsa:2048 -sha256 -subj "/CN=$SSL_CN/emailAddress=$SSL_EMAIL/O=$SSL_O/C=$SSL_C/ST=$SSL_ST/L=$SSL_L" -out /logimza/.openssl/ssl/cacert.pem -outform PEM
 cp /logimza/.openssl/ssl/cacert.pem /logimza/.openssl/CA/
 cp /logimza/.openssl/ssl/privkey.pem /logimza/.openssl/CA/private/cakey.pem
 
