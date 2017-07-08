@@ -12,7 +12,8 @@ SSL_L="Sisli"
 
 # Zaman damgasi icin OpenSSL ayarlari
 mkdir -p /logimza/.openssl
-fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/openssl.cnf -o /logimza/.openssl/openssl.cnf
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/openssl.cnf 
+mv openssl.cnf /logimza/.openssl/openssl.cnf
 
 # Sertifika icin rasgele sifre olusturuyoruz
 touch /logimza/.openssl/password.txt
@@ -45,11 +46,15 @@ cp /logimza/.openssl/ssl/tsacert.pem /logimza/.openssl/CA/
 cp /logimza/.openssl/ssl/tsakey.pem /logimza/.openssl/CA/private/
 
 # log_browser ve imzalama betiklerini yukle
-fetch https://github.com/d2bilisim/log_browser/archive/master.zip -o /tmp/log_browser.zip
+fetch https://github.com/d2bilisim/log_browser/archive/master.zip 
+mv master.zip /tmp/log_browser.zip
 unzip -d /usr/local/www /tmp/log_browser.zip
 mv /usr/local/www/log_browser-master /usr/local/www/log_browser
 rm /tmp/log_browser.zip
-fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/dogrula-pfsense21.php -o /usr/local/www/log_browser/dogrula.php
-fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/logimza-imzala-pfsense21.sh -o /sbin/logimza-imzala.sh
-fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/dhcptibduzenle.sh -o /sbin/dhcptibduzenle.sh
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/dogrula-pfsense21.php 
+mv dogrula-pfsense21.php /usr/local/www/log_browser/dogrula.php
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/logimza-imzala-pfsense21.sh 
+mv logimza-imzala-pfsense21.sh /sbin/logimza-imzala.sh
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/dhcptibduzenle.sh 
+mv dhcptibduzenle.sh /sbin/dhcptibduzenle.sh
 chmod +x /sbin/logimza-imzala.sh /sbin/dhcptibduzenle.sh
