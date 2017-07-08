@@ -1,18 +1,18 @@
 #!/bin/sh
 
-SSL_CN="hotspot.pfsense.biz.tr"
-SSL_EMAIL="hotspot@pfsense.biz.tr"
-SSL_O="Monospot"
+SSL_CN="dolpway.d2bilisim.com.tr"
+SSL_EMAIL="dolpway@d2bilisim.com.tr"
+SSL_O="D2 Bilgi Teknolojileri"
 SSL_C="TR"
 SSL_ST="Istanbul"
-SSL_L="Kartal"
+SSL_L="Sisli"
 
 # Gerekirse sifirla
 # rm -rf /logimza/.openssl/password.txt /logimza/.openssl/CA/ /logimza/.openssl/ssl/ /usr/local/www/log_browser /sbin/logimza-imzala.sh /sbin/dhcptibduzenle.sh
 
 # Zaman damgasi icin OpenSSL ayarlari
 mkdir -p /logimza/.openssl
-fetch https://bitbucket.org/mono/pfsense-5651/raw/master/openssl.cnf -o /logimza/.openssl/openssl.cnf
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/openssl.cnf -o /logimza/.openssl/openssl.cnf
 
 # Sertifika icin rasgele sifre olusturuyoruz
 touch /logimza/.openssl/password.txt
@@ -45,10 +45,10 @@ cp /logimza/.openssl/ssl/tsacert.pem /logimza/.openssl/CA/
 cp /logimza/.openssl/ssl/tsakey.pem /logimza/.openssl/CA/private/
 
 # log_browser ve imzalama betiklerini yukle
-fetch https://github.com/monobilisim/log_browser/archive/master.zip -o /tmp/log_browser.zip
+fetch https://github.com/d2bilisim/log_browser/archive/master.zip -o /tmp/log_browser.zip
 unzip -d /usr/local/www /tmp/log_browser.zip
 mv /usr/local/www/log_browser-master /usr/local/www/log_browser
 rm /tmp/log_browser.zip
-fetch https://bitbucket.org/mono/pfsense-5651/raw/master/logimza-imzala.sh -o /sbin/logimza-imzala.sh
-fetch https://bitbucket.org/mono/pfsense-5651/raw/master/dhcptibduzenle.sh -o /sbin/dhcptibduzenle.sh
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/logimza-imzala.sh -o /sbin/logimza-imzala.sh
+fetch https://raw.githubusercontent.com/d2bilisim/pfsense-5651/master/dhcptibduzenle.sh -o /sbin/dhcptibduzenle.sh
 chmod +x /sbin/logimza-imzala.sh /sbin/dhcptibduzenle.sh
